@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario{
+public class Usuario {
     private String nombre;
     private String tipo; // Estudiante, Profesor, Personal de la Biblioteca
     private List<Libro> historialPrestamos;
