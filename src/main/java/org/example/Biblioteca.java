@@ -1,5 +1,5 @@
 package org.example;
 
-public class Biblioteca {
+public class Biblioteca{
     
 }
