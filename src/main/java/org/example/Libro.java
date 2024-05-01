@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Libro{
+public class Libro {
     private String titulo;
     private String autor;
     private String categoria;

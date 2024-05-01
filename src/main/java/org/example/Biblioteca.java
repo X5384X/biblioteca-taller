@@ -1,6 +1,6 @@
 package org.example;
 
-public class Biblioteca{
+public class Biblioteca {
 
     public void prestamo(){
 

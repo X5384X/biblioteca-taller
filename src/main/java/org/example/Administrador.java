@@ -1,5 +1,5 @@
 package org.example;
 
-public class Administrador{
+public class Administrador {
     
 }
