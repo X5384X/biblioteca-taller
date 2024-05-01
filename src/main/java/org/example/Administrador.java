@@ -7,18 +7,22 @@ public class Administrador extends Usuario{
         super(nombre, tipo);
         this.adminId = adminId;
     }
+
+    public int getAdminId(){
+        return adminId;
+    }
     
-    public static void modificarUsuario(){}
+    public void modificarUsuario(){}
 
-    public static void eliminarUsuario(){}
+    public void eliminarUsuario(){}
 
-    public static void agregarUsuario(){}
+    public void agregarUsuario(){}
 
-    public static void agregarLibro(){}
+    public void agregarLibro(){}
 
-    public static void modificarLibro(){}
+    public void modificarLibro(){}
 
-    public static void eliminarLibro(){}
+    public void eliminarLibro(){}
 
     public static boolean verDisponibilidad(){
         return true;
