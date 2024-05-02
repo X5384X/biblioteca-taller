@@ -8,28 +8,11 @@ public abstract class Biblioteca {
 
     List<Libro> libros = new ArrayList<>();
 
-    public void agregarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles){
-        libros.add(new Libro(titulo, autor, categoria, ejemplaresDisponibles));
-    }
+    public abstract void agregarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles);
 
-    public void modificarLibro(int index){
-        Scanner scn = new Scanner(System.in);
-        Libro libro = libros.get(index);
-        System.out.println(libro.toString());
-        String titulo = scn.next();
-        libro.setTitulo(titulo);
-        String autor = scn.next();
-        libro.setAutor(autor);
-        String categoria = scn.next();
-        libro.setCategoria(categoria);
-        int numDisponibles = scn.nextInt();
-        libro.setEjemplaresDisponibles(numDisponibles);
-        libros.add(index, libro);
-    }
+    public abstract void modificarLibro(int index);
 
-    public void eliminarLibro(int index){
-
-    }
+    public abstract void eliminarLibro(int index);
 
     public void prestamo(){
 
