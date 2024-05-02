@@ -1,30 +1,27 @@
 package org.example;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Administrador extends Usuario{
-    private int adminId;
+    private List<Administrador> admins = new ArrayList<Administrador>();
 
-    public Administrador(int adminId, String nombre, String tipo){
-        super(nombre, tipo);
-        this.adminId = adminId;
-    }
-
-    public int getAdminId(){
-        return adminId;
+    public Administrador(int id, String nombre, String tipo){
+        super(id, nombre, tipo);
+        admins.add(this);
     }
     
-    public void modificarUsuario(){}
+    private boolean verificarPermisos(int i){
+        return admins.contains(i);
+    }
 
-    public void eliminarUsuario(){}
+    public void agregarLibro(Usuario u){
+        Libro l;
+        if(verificarPermisos(u.getId())){
+            // listaLibros.add(l);
+        };
+    }
 
-    public void agregarUsuario(){}
-
-    public void agregarLibro(){}
-
-    public void modificarLibro(){}
-
-    public void eliminarLibro(){}
-
-    public static boolean verDisponibilidad(){
+    public static boolean verDisponibilidad(Libro l){
         return true;
     }
 
