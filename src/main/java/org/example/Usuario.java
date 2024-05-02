@@ -25,6 +25,14 @@ public class Usuario{
         return id;
     }
 
+    public String getNombre(){
+        return nombre;
+    }
+
+    public String getTipo(){
+        return tipo;
+    }
+
     public void agregarPrestamo(Libro libro) {
         historialPrestamos.add(libro);
     }

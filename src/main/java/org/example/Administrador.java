@@ -14,15 +14,20 @@ public class Administrador extends Usuario{
         return admins.contains(i);
     }
 
-    public void agregarLibro(Usuario u){
-        Libro l;
-        if(verificarPermisos(u.getId())){
-            // listaLibros.add(l);
-        };
-    }
-
-    public static boolean verDisponibilidad(Libro l){
+    public boolean verDisponibilidad(Libro l){
         return true;
     }
+
+    public void modificarUsuario(){}
+
+    public void eliminarUsuario(){}
+
+    public void agregarUsuario(){}
+
+    public void agregarLibro(){}
+
+    public void modificarLibro(){}
+
+    public void eliminarLibro(){}
 
 }
