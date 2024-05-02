@@ -51,4 +51,10 @@ public class Libro {
     public void setEjemplaresDisponibles(int ejemplaresDisponibles) {
         this.ejemplaresDisponibles = ejemplaresDisponibles;
     }
+
+    @Override
+    public String toString() {
+        return "[titulo=" + titulo + ", autor=" + autor + ", categoria=" + categoria + ", ejemplaresDisponibles="
+                + ejemplaresDisponibles + ", calificaciones=" + calificaciones + ", comentarios=" + comentarios + "]";
+    }
 }
