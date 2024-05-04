@@ -18,7 +18,7 @@ public class Administrador extends Biblioteca {
         this.name = nombre;
         this.tipo = tipo;
         admins.add(this);
-        // agregar el administrador a la lista de usuarios
+        Biblioteca.nuevoUsuario(this);
     }
     
     private boolean verificarPermisos(int i){
