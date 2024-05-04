@@ -7,7 +7,6 @@ public class Usuario{
     private int id;
     private String nombre;
     private String tipo; // Estudiante, Profesor, Personal de la Biblioteca
-    private List<Usuario> listaUsuarios;
     private List<Libro> historialPrestamos;
     private List<Libro> librosReservados;
     private List<Integer> calificaciones;
