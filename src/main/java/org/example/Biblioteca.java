@@ -17,7 +17,6 @@ public abstract class Biblioteca {
 
     public abstract void eliminarLibro(Biblioteca b, Usuario u, int index);
 
-    @SuppressWarnings("unchecked")
     public Libro prestamo(String busqueda, int num){
         ArrayList<Libro> libPrestamo = busqueda(busqueda, num);
         System.out.println("Elija el numero del libro que desea elejir");
@@ -69,7 +68,6 @@ public abstract class Biblioteca {
         libD.setFechaDevolucion(fd);
     }
 
-    @SuppressWarnings("rawtypes")
     public ArrayList busqueda(String busqueda, int num){
         ArrayList<Libro> libEncontrados = new ArrayList<>();
         for (Libro libro : libros) {
