@@ -107,22 +107,18 @@ public abstract class Biblioteca {
     }
 
     public void quitarUsuario(Usuario n) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'quitarUsuario'");
+        usuarios.remove(n);
     }
 
     public void nuevoUsuario(Usuario u) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nuevoUsuario'");
+        usuarios.add(u);
     }
 
     public void ingresarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ingresarLibro'");
+        libros.add(new Libro(titulo, autor, categoria, ejemplaresDisponibles));
     }
 
     public void quitarLibro(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'quitarLibro'");
+        libros.remove(index);
     }
 }
