@@ -13,27 +13,28 @@ public class Administrador extends Biblioteca {
     private List<Administrador> admins = new ArrayList<Administrador>();
     Scanner reader =  new Scanner(System.in);
 
-    public Administrador(int id, String nombre, String tipo){
+    public Administrador(int id, String nombre, String tipo, Biblioteca b){
         this.id = id;
         this.name = nombre;
         this.tipo = tipo;
         admins.add(this);
-        Biblioteca.nuevoUsuario(this);
+        Usuario admin = new Usuario(id, nombre, tipo);
+        b.nuevoUsuario(admin);
     }
     
     private boolean verificarPermisos(int i){
         return admins.contains(i);
     }
 
-    public List<Usuario> listaUsuarios(){
+    public List<Usuario> listaUsuarios(Biblioteca b){
         List<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(Biblioteca.getUsuarios());
+        usuarios.addAll(b.getUsuarios());
         return usuarios;
     }
 
-    public List<Libro> listaLibros(){
+    public List<Libro> listaLibros(Biblioteca b){
         List<Libro> libros = new ArrayList<>();
-        libros.add(Biblioteca.getLibros());
+        libros.addAll(b.getLibros());
         return libros;
     }
 
@@ -41,8 +42,8 @@ public class Administrador extends Biblioteca {
         return true;
     }
 
-    public void encontrarUsuarioConId(Usuario a, int b){
-        List<Usuario> usuarios = listaUsuarios();
+    public void encontrarUsuarioConId(Usuario a, int b, Biblioteca c){
+        List<Usuario> usuarios = listaUsuarios(c);
         if(verificarPermisos(a.getId())){
             List<Usuario> usuarioEncontrado = usuarios.stream()
             .filter(user -> user.getId() == b)
@@ -65,8 +66,8 @@ public class Administrador extends Biblioteca {
         }
     }
 
-    public void eliminarUsuario(Usuario a, int b){
-        List<Usuario> usuarios = listaUsuarios();
+    public void eliminarUsuario(Usuario a, int b, Biblioteca c){
+        List<Usuario> usuarios = listaUsuarios(c);
         if(verificarPermisos(a.getId())){
             List<Usuario> usuarioEncontrado = usuarios.stream()
             .filter(user -> user.getId() == b)
@@ -82,19 +83,19 @@ public class Administrador extends Biblioteca {
         }
     }
 
-    public void agregarUsuario(Usuario a){
+    public void agregarUsuario(Usuario a, Biblioteca c){
         if(verificarPermisos(a.getId())){
-            System.out.println("Crear un nuevo usuario");
+            System.out.println("Creae un nuevo usuario");
             int nuevoUsuarioId = (int) Math.random();
             System.out.print("Nombre: ");
             String nombre = reader.nextLine();
             System.out.print("Tipo: ");
             String tipo = reader.nextLine();
 
-            if (!listaUsuarios().contains(nuevoUsuarioId)) {
+            if (!listaUsuarios(c).contains(nuevoUsuarioId)) {
                 System.out.println("Usuario creado");
                 Usuario usuario = new Usuario(nuevoUsuarioId, nombre, tipo);
-                Biblioteca.nuevoUsuario(usuario);
+                c.nuevoUsuario(usuario);
             } else {
                 System.out.println("Usuario ya existe. Intente escoger un usuario distinto.");
             }
@@ -113,10 +114,11 @@ public class Administrador extends Biblioteca {
     }
 
     @Override
-    public void modificarLibro(int index){
+    public void modificarLibro(int index, Biblioteca b){
         Usuario admin;
         id = admin.getId();
-        List<Libro> listaLibros = listaLibros();
+        List<Libro> listaLibros = new ArrayList<>();
+        listaLibros.addAll(listaLibros(b));
         if(verificarPermisos(id)){
             Libro libro = listaLibros.get(index);
             System.out.print("Titulo: ");
@@ -133,11 +135,11 @@ public class Administrador extends Biblioteca {
     }
 
     @Override
-    public void eliminarLibro(int index){
+    public void eliminarLibro(int index, Biblioteca b){
         Usuario admin;
         id = admin.getId();
         if(verificarPermisos(id)){
-            Biblioteca.quitarLibro(index);
+            b.quitarLibro(index);
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
         }

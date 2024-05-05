@@ -7,12 +7,13 @@ import java.util.Scanner;
 public abstract class Biblioteca {
 
     List<Libro> libros = new ArrayList<>();
+    List<Usuario> usuarios = new ArrayList<>();
 
     public abstract void agregarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles);
 
-    public abstract void modificarLibro(int index);
+    public abstract void modificarLibro(int index, Biblioteca b);
 
-    public abstract void eliminarLibro(int index);
+    public abstract void eliminarLibro(int index, Biblioteca b);
 
     public Libro prestamo(String busqueda, int num){
         List<Libro> libPrestamo = busqueda(busqueda, num);
@@ -65,11 +66,31 @@ public abstract class Biblioteca {
         return new Usuario(0, nombre, null);
     }
 
-    public void getLibros(){
-
+    public List<Libro> getLibros(){
+        return libros;
     }
 
-    public void getUsuarios(){
+    public List<Usuario> getUsuarios(){
+        return usuarios;
+    }
 
+    public static void quitarUsuario(Usuario n) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'quitarUsuario'");
+    }
+
+    public void nuevoUsuario(Usuario u) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'nuevoUsuario'");
+    }
+
+    public static void ingresarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ingresarLibro'");
+    }
+
+    public void quitarLibro(int index) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'quitarLibro'");
     }
 }
