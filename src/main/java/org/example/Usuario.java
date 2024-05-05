@@ -32,6 +32,14 @@ public class Usuario{
         return tipo;
     }
 
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+
     public void agregarPrestamo(Libro libro) {
         historialPrestamos.add(libro);
     }

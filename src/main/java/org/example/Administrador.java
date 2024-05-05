@@ -2,7 +2,6 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Administrador extends Biblioteca {
     private int id;
@@ -36,46 +35,51 @@ public class Administrador extends Biblioteca {
         return libros;
     }
 
-    public boolean verDisponibilidad(Libro l){
-        return true;
-    }
-
-    public void encontrarUsuarioConId(Usuario a, int b, Biblioteca c){
-        List<Usuario> usuarios = listaUsuarios(c);
+    public boolean verDisponibilidad(Usuario a, Libro l){
         if(verificarPermisos(a.getId())){
-            List<Usuario> usuarioEncontrado = usuarios.stream()
-            .filter(user -> user.getId() == b)
-            .collect(Collectors.toList());
-            if(usuarioEncontrado.size() < 1){
-                System.out.println("Usuario no existe.");
+            if (l.getEjemplaresDisponibles() >= 1) {
+                return true;
             } else {
-                Usuario n = usuarioEncontrado.get(0);
-                System.out.println(n.toString());
+                return false;
             }
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
         }
     }
 
-    public void modificarUsuario(Usuario a, int id){
+    public Usuario encontrarUsuarioConId(Usuario a, int b, Biblioteca c){
+        List<Usuario> usuarios = listaUsuarios(c);
         if(verificarPermisos(a.getId())){
-            // definir el metodo
+            for(Usuario usuario: usuarios){
+                if(usuario.getId() == b){
+                    return usuario;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("No se tienen los permisos suficientes.");
+        }
+        return null;
+    }
+
+    public void modificarUsuario(Usuario a, int id, Biblioteca c){
+        if(verificarPermisos(a.getId())){
+            Usuario usuarioModificar = encontrarUsuarioConId(a, id, c);
+            System.out.print("Seleccione nuevo nombre: ");
+            usuarioModificar.setNombre(reader.nextLine());
+            System.out.print("Tipo: ");
+            usuarioModificar.setTipo(reader.nextLine());
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
         }
     }
 
     public void eliminarUsuario(Usuario a, int b, Biblioteca c){
-        List<Usuario> usuarios = listaUsuarios(c);
         if(verificarPermisos(a.getId())){
-            List<Usuario> usuarioEncontrado = usuarios.stream()
-            .filter(user -> user.getId() == b)
-            .collect(Collectors.toList());
-            if(usuarioEncontrado.size() < 1){
+            Usuario usuarioEncontrado = encontrarUsuarioConId(a, b, c);
+            if(usuarioEncontrado == null){
                 System.out.println("Usuario no existe.");
             } else {
-                Usuario n = usuarioEncontrado.get(0);
-                Biblioteca.quitarUsuario(n);
+                c.quitarUsuario(usuarioEncontrado);
             }
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
@@ -116,13 +120,13 @@ public class Administrador extends Biblioteca {
         listaLibros.addAll(listaLibros(b));
         if(verificarPermisos(a.getId())){
             Libro libro = listaLibros.get(index);
-            System.out.print("Titulo: ");
+            System.out.print("Nuevo titulo: ");
             libro.setTitulo(reader.nextLine());
-            System.out.println("Autor:");
+            System.out.println("Nuevo autor:");
             libro.setAutor(reader.nextLine());
-            System.out.println("Categoria:");
+            System.out.println("Nueva categoria:");
             libro.setCategoria(reader.nextLine());
-            System.out.println("Ejemplares:");
+            System.out.println("Nueva cantidad de ejemplares:");
             libro.setEjemplaresDisponibles(reader.nextInt());
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
