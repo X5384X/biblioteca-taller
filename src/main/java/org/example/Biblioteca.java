@@ -65,11 +65,11 @@ public abstract class Biblioteca {
         return new Usuario(0, nombre, null);
     }
 
-    public void gestLibros(){
+    public void getLibros(){
 
     }
 
-    public void gestUsuarios(){
+    public void getUsuarios(){
 
     }
 }
