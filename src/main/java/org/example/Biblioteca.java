@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.List;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,67 +8,35 @@ public abstract class Biblioteca {
 
     List<Libro> libros = new ArrayList<>();
     List<Usuario> usuarios = new ArrayList<>();
-    Scanner scn = new Scanner(System.in);
 
-    public abstract void agregarLibro(Biblioteca b, Usuario u, String titulo, String autor, String categoria, int ejemplaresDisponibles);
+    public abstract void agregarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles);
 
-    public abstract void modificarLibro(Biblioteca b, Usuario u, int index);
+    public abstract void modificarLibro(int index, Biblioteca b);
 
-    public abstract void eliminarLibro(Biblioteca b, Usuario u, int index);
+    public abstract void eliminarLibro(int index, Biblioteca b);
 
     public Libro prestamo(String busqueda, int num){
-        ArrayList<Libro> libPrestamo = busqueda(busqueda, num);
+        List<Libro> libPrestamo = busqueda(busqueda, num);
         System.out.println("Elija el numero del libro que desea elejir");
         int i = 0;
         for (Libro libro : libPrestamo) {
-            System.out.println("["+i+"] "+libro.toString());
+            System.out.println("[i] "+libro.toString());
             i++;
         }
-        int e = scn.nextInt();
-        Libro libP = libPrestamo.get(e);
-        LocalDate fp = libP.getFechaPrestamo();
-        LocalDate fd = libP.getFechaDevolucion();
-        fp = LocalDate.now();
-        System.out.println("La fecha del prestamo es: "+fp);
-        fd = fp.plusDays(7);
-        System.out.println("La fecha de devolución es: "+fd);
-        libP.setFechaPrestamo(fp);
-        libP.setFechaDevolucion(fd);
+        Libro libP = libPrestamo.get(i);
         return libP;
     }
 
-    public void devolucion(Usuario u){
-        int n = 0;
-        System.out.println("Elija el numero del libro que desea devolver");
-        for (Libro libro : u.getHistorialPrestamos()) {
-            System.out.println("["+n+"] "+libro.toString());
-            n++;
-        }
-        int e = scn.nextInt();
-        u.getHistorialPrestamos().remove(e);
+    public void devolucion(){
+
     }
     
-    public void renovacion(Usuario u){
-        int n = 0;
-        System.out.println("Elija el libro que desea renovar");
-        for (Libro libro : u.getHistorialPrestamos()) {
-            System.out.println("["+n+"] "+libro.toString());
-            n++;
-        }
-        int e = scn.nextInt();
-        Libro libD = u.getHistorialPrestamos().get(e);
-        LocalDate fp = libD.getFechaPrestamo();
-        LocalDate fd = libD.getFechaDevolucion();
-        fp = fd;
-        System.out.println("La fecha de renovación es: "+fp);
-        fd = fd.plusDays(7);
-        System.out.println("La nueva fecha de devolución es: "+fd);
-        libD.setFechaPrestamo(fp);
-        libD.setFechaDevolucion(fd);
+    public void renovacion(){
+
     }
 
-    public ArrayList busqueda(String busqueda, int num){
-        ArrayList<Libro> libEncontrados = new ArrayList<>();
+    public List busqueda(String busqueda, int num){
+        List<Libro> libEncontrados = new ArrayList<>();
         for (Libro libro : libros) {
             if (num == 1) {
                 if (busqueda.toLowerCase().equals(libro.getTitulo().toLowerCase())){
@@ -93,6 +60,7 @@ public abstract class Biblioteca {
     }
 
     public Usuario registroUsuario(){
+        Scanner scn = new Scanner(System.in);
         System.out.println("Introduzca su nombre de usuario:");
         String nombre = scn.next();
         return new Usuario(0, nombre, null);
@@ -112,12 +80,11 @@ public abstract class Biblioteca {
     }
 
     public void nuevoUsuario(Usuario u) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nuevoUsuario'");
+        usuarios.add(u);
     }
 
     public static void ingresarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles) {
-        // TODO Auto-generated method stub
+        libros.add(new Libro(titulo, autor, categoria, ejemplaresDisponibles));
         throw new UnsupportedOperationException("Unimplemented method 'ingresarLibro'");
     }
 
@@ -125,4 +92,3 @@ public abstract class Biblioteca {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'quitarLibro'");
     }
-}
