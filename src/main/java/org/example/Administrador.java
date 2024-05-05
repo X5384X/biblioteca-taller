@@ -59,7 +59,7 @@ public class Administrador extends Biblioteca {
 
     public void modificarUsuario(Usuario a, int id){
         if(verificarPermisos(a.getId())){
-            // definir el metodo
+            
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
         }
@@ -75,7 +75,7 @@ public class Administrador extends Biblioteca {
                 System.out.println("Usuario no existe.");
             } else {
                 Usuario n = usuarioEncontrado.get(0);
-                Biblioteca.quitarUsuario(n);
+                c.quitarUsuario(n);
             }
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");

@@ -106,7 +106,7 @@ public abstract class Biblioteca {
         return usuarios;
     }
 
-    public static void quitarUsuario(Usuario n) {
+    public void quitarUsuario(Usuario n) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'quitarUsuario'");
     }
@@ -116,7 +116,7 @@ public abstract class Biblioteca {
         throw new UnsupportedOperationException("Unimplemented method 'nuevoUsuario'");
     }
 
-    public static void ingresarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles) {
+    public void ingresarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ingresarLibro'");
     }
