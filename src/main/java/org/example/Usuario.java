@@ -3,33 +3,19 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario{
-    private int id;
+public class Usuario {
     private String nombre;
     private String tipo; // Estudiante, Profesor, Personal de la Biblioteca
     private List<Libro> historialPrestamos;
     private List<Libro> librosReservados;
     private List<Integer> calificaciones;
 
-    public Usuario(int id, String nombre, String tipo) {
-        this.id = id;
+    public Usuario(String nombre, String tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.historialPrestamos = new ArrayList<>();
         this.librosReservados = new ArrayList<>();
         this.calificaciones = new ArrayList<>();
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public String getNombre(){
-        return nombre;
-    }
-
-    public String getTipo(){
-        return tipo;
     }
 
     public void agregarPrestamo(Libro libro) {
@@ -44,11 +30,4 @@ public class Usuario{
         calificaciones.add(calificacion);
     }
 
-    public List<Libro> getHistorialPrestamos() {
-        return historialPrestamos;
-    }
-
-    public void setHistorialPrestamos(List<Libro> historialPrestamos) {
-        this.historialPrestamos = historialPrestamos;
-    }
 }
