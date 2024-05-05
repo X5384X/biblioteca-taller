@@ -44,4 +44,9 @@ public class Usuario{
         calificaciones.add(calificacion);
     }
 
+    @Override
+    public String toString() {
+        return "[id: " + id + ", nombre: " + nombre + ", tipo: " + tipo + "]";
+    }
+
 }

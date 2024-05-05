@@ -50,6 +50,7 @@ public class Administrador extends Biblioteca {
                 System.out.println("Usuario no existe.");
             } else {
                 Usuario n = usuarioEncontrado.get(0);
+                System.out.println(n.toString());
             }
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
