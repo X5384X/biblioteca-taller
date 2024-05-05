@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import org.example.Usuario;
-
 public class Administrador extends Biblioteca {
     private int id;
     private String name;
@@ -103,23 +101,19 @@ public class Administrador extends Biblioteca {
     }
 
     @Override
-    public void  agregarLibro(String titulo, String autor, String categoria, int ejemplaresDisponibles){
-        Usuario a; 
-        id = a.getId();
-        if(verificarPermisos(id)){
-            Biblioteca.ingresarLibro(titulo, autor, categoria, ejemplaresDisponibles);
+    public void  agregarLibro(Biblioteca b, Usuario a, String titulo, String autor, String categoria, int ejemplaresDisponibles){
+        if(verificarPermisos(a.getId())){
+            b.ingresarLibro(titulo, autor, categoria, ejemplaresDisponibles);
         } else { 
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
         }
     }
 
     @Override
-    public void modificarLibro(int index, Biblioteca b){
-        Usuario admin;
-        id = admin.getId();
+    public void modificarLibro(Biblioteca b, Usuario a, int index){
         List<Libro> listaLibros = new ArrayList<>();
         listaLibros.addAll(listaLibros(b));
-        if(verificarPermisos(id)){
+        if(verificarPermisos(a.getId())){
             Libro libro = listaLibros.get(index);
             System.out.print("Titulo: ");
             libro.setTitulo(reader.nextLine());
@@ -135,10 +129,8 @@ public class Administrador extends Biblioteca {
     }
 
     @Override
-    public void eliminarLibro(int index, Biblioteca b){
-        Usuario admin;
-        id = admin.getId();
-        if(verificarPermisos(id)){
+    public void eliminarLibro(Biblioteca b, Usuario a, int index){
+        if(verificarPermisos(a.getId())){
             b.quitarLibro(index);
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
