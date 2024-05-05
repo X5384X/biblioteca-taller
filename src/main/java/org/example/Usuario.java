@@ -51,4 +51,9 @@ public class Usuario{
     public void setHistorialPrestamos(List<Libro> historialPrestamos) {
         this.historialPrestamos = historialPrestamos;
     }
+
+    @Override
+    public String toString() {
+        return "[id: " + id + ", nombre: " + nombre + ", tipo: " + tipo + "]";
+    }
 }
