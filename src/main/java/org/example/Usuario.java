@@ -44,4 +44,11 @@ public class Usuario{
         calificaciones.add(calificacion);
     }
 
+    public List<Libro> getHistorialPrestamos() {
+        return historialPrestamos;
+    }
+
+    public void setHistorialPrestamos(List<Libro> historialPrestamos) {
+        this.historialPrestamos = historialPrestamos;
+    }
 }

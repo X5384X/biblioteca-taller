@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class Libro {
     private int ejemplaresDisponibles;
     private List<Integer> calificaciones;
     private List<String> comentarios;
+    private LocalDate fechaPrestamo;
+    private LocalDate fechaDevolucion;
 
     public Libro(String titulo, String autor, String categoria, int ejemplaresDisponibles) {
         this.titulo = titulo;
@@ -50,6 +53,22 @@ public class Libro {
 
     public void setEjemplaresDisponibles(int ejemplaresDisponibles) {
         this.ejemplaresDisponibles = ejemplaresDisponibles;
+    }
+    
+    public LocalDate getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
+        this.fechaPrestamo = fechaPrestamo;
+    }
+
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
     }
 
     @Override
