@@ -5,17 +5,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Biblioteca {
+public class Biblioteca {
 
     List<Libro> libros = new ArrayList<>();
     List<Usuario> usuarios = new ArrayList<>();
     Scanner scn = new Scanner(System.in);
-
-    public abstract void agregarLibro(Biblioteca b, Usuario u, String titulo, String autor, String categoria, int ejemplaresDisponibles);
-
-    public abstract void modificarLibro(Biblioteca b, Usuario u, int index);
-
-    public abstract void eliminarLibro(Biblioteca b, Usuario u, int index);
 
     public Libro prestamo(String busqueda, int num){
         ArrayList<Libro> libPrestamo = busqueda(busqueda, num);
@@ -95,7 +89,7 @@ public abstract class Biblioteca {
     public Usuario registroUsuario(){
         System.out.println("Introduzca su nombre de usuario:");
         String nombre = scn.next();
-        return new Usuario(0, nombre, null);
+        return new Usuario(0, nombre, null, false);
     }
 
     public List<Libro> getLibros(){
@@ -121,4 +115,6 @@ public abstract class Biblioteca {
     public void quitarLibro(int index) {
         libros.remove(index);
     }
+
+
 }

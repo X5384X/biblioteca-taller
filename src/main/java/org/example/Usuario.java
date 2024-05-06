@@ -7,17 +7,23 @@ public class Usuario{
     private int id;
     private String nombre;
     private String tipo; // Estudiante, Profesor, Personal de la Biblioteca
+    private boolean esAdmin;
     private List<Libro> historialPrestamos;
     private List<Libro> librosReservados;
     private List<Integer> calificaciones;
 
-    public Usuario(int id, String nombre, String tipo) {
+    public Usuario(int id, String nombre, String tipo, boolean esAdmin) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
+        this.esAdmin = esAdmin;
         this.historialPrestamos = new ArrayList<>();
         this.librosReservados = new ArrayList<>();
         this.calificaciones = new ArrayList<>();
+    }
+
+    public boolean esAdmin(){
+        return esAdmin;
     }
 
     public int getId(){

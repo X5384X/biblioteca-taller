@@ -3,24 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Administrador extends Biblioteca {
-    private int id;
-    private String name;
-    private String tipo;
+public class Administrador extends Usuario implements InterfaceBiblioteca {
     private List<Administrador> admins = new ArrayList<Administrador>();
     Scanner reader =  new Scanner(System.in);
 
     public Administrador(int id, String nombre, String tipo, Biblioteca b){
-        this.id = id;
-        this.name = nombre;
-        this.tipo = tipo;
+        super(id, nombre, tipo, true);
         admins.add(this);
-        Usuario admin = new Usuario(id, nombre, tipo);
-        b.nuevoUsuario(admin);
-    }
-    
-    private boolean verificarPermisos(int i){
-        return admins.contains(i);
+        b.nuevoUsuario(this);
     }
 
     public List<Usuario> listaUsuarios(Biblioteca b){
@@ -36,7 +26,7 @@ public class Administrador extends Biblioteca {
     }
 
     public boolean verDisponibilidad(Usuario a, Libro l){
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             if (l.getEjemplaresDisponibles() >= 1) {
                 return true;
             } else {
@@ -49,7 +39,7 @@ public class Administrador extends Biblioteca {
 
     public Usuario encontrarUsuarioConId(Usuario a, int b, Biblioteca c){
         List<Usuario> usuarios = listaUsuarios(c);
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             for(Usuario usuario: usuarios){
                 if(usuario.getId() == b){
                     return usuario;
@@ -62,7 +52,7 @@ public class Administrador extends Biblioteca {
     }
 
     public void modificarUsuario(Usuario a, int id, Biblioteca c){
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             Usuario usuarioModificar = encontrarUsuarioConId(a, id, c);
             System.out.print("Seleccione nuevo nombre: ");
             usuarioModificar.setNombre(reader.nextLine());
@@ -74,7 +64,7 @@ public class Administrador extends Biblioteca {
     }
 
     public void eliminarUsuario(Usuario a, int b, Biblioteca c){
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             Usuario usuarioEncontrado = encontrarUsuarioConId(a, b, c);
             if(usuarioEncontrado == null){
                 System.out.println("Usuario no existe.");
@@ -87,7 +77,7 @@ public class Administrador extends Biblioteca {
     }
 
     public void agregarUsuario(Usuario a, Biblioteca c){
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             System.out.println("Creae un nuevo usuario");
             int nuevoUsuarioId = (int) Math.random();
             System.out.print("Nombre: ");
@@ -97,17 +87,19 @@ public class Administrador extends Biblioteca {
 
             if (!listaUsuarios(c).contains(nuevoUsuarioId)) {
                 System.out.println("Usuario creado");
-                Usuario usuario = new Usuario(nuevoUsuarioId, nombre, tipo);
+                Usuario usuario = new Usuario(nuevoUsuarioId, nombre, tipo, false);
                 c.nuevoUsuario(usuario);
             } else {
                 System.out.println("Usuario ya existe. Intente escoger un usuario distinto.");
             }
+        } else { 
+            throw new IllegalArgumentException("No se tienen los permisos suficientes.");
         }
     }
 
     @Override
-    public void  agregarLibro(Biblioteca b, Usuario a, String titulo, String autor, String categoria, int ejemplaresDisponibles){
-        if(verificarPermisos(a.getId())){
+    public void agregarLibro(Biblioteca b, Usuario a, String titulo, String autor, String categoria, int ejemplaresDisponibles){
+        if(a.esAdmin()){
             b.ingresarLibro(titulo, autor, categoria, ejemplaresDisponibles);
         } else { 
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
@@ -118,7 +110,7 @@ public class Administrador extends Biblioteca {
     public void modificarLibro(Biblioteca b, Usuario a, int index){
         List<Libro> listaLibros = new ArrayList<>();
         listaLibros.addAll(listaLibros(b));
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             Libro libro = listaLibros.get(index);
             System.out.print("Nuevo titulo: ");
             libro.setTitulo(reader.nextLine());
@@ -135,7 +127,7 @@ public class Administrador extends Biblioteca {
 
     @Override
     public void eliminarLibro(Biblioteca b, Usuario a, int index){
-        if(verificarPermisos(a.getId())){
+        if(a.esAdmin()){
             b.quitarLibro(index);
         } else {
             throw new IllegalArgumentException("No se tienen los permisos suficientes.");
